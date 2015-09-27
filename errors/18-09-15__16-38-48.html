@@ -1,0 +1,110 @@
+Friday 18th of September 2015 04:38:48 PM
+exception 'Exception' with message 'negative $lastShipHit' in /home/starsquest/servers/game/includes/libs/opbe/combatObject/ShipsCleaner.php:48
+Stack trace:
+#0 /home/starsquest/servers/game/includes/libs/opbe/models/ShipType.php(203): ShipsCleaner->__construct(Object(Defense), -0.39999999999998, 150000)
+#1 /home/starsquest/servers/game/includes/libs/opbe/models/Fleet.php(171): ShipType->cleanShips()
+#2 /home/starsquest/servers/game/includes/libs/opbe/models/Player.php(158): Fleet->cleanShips()
+#3 /home/starsquest/servers/game/includes/libs/opbe/models/PlayerGroup.php(117): Player->cleanShips()
+#4 /home/starsquest/servers/game/includes/libs/opbe/core/Round.php(115): PlayerGroup->cleanShips()
+#5 /home/starsquest/servers/game/includes/libs/opbe/core/Battle.php(77): Round->startRound()
+#6 [internal function]: Battle->startBattle()
+#7 /home/starsquest/servers/game/includes/libs/opbe/utils/DebugManager.php(57): call_user_func_array(Array, Array)
+#8 /home/starsquest/servers/game/includes/libs/opbe/implementations/2Moons/1_6_1_injectionmode/calculateAttack.php(121): DebugManager::{closure}()
+#9 /home/starsquest/servers/game/includes/pages/ShowBattleSimPage.php(94): calculateAttack(Array, Array, '66', '10')
+#10 /home/starsquest/servers/game/game.php(453): ShowBattleSimPage()
+#11 {main}
+$_POST =
+$_GET =
+        <table class="lined widthFull">
+    <caption> <br> 220% - 220% - 250%</caption>
+    <thead>
+        <tr>
+                            <th>Battleship</th>
+                    </tr>
+    </thead>
+    <tbody>
+        <tr>
+                
+                <td>0150000</td>                   
+                    </tr>
+    </tbody>
+</table><br>
+        <table class="lined widthFull">
+    <caption> <br> 230% - 230% - 220%</caption>
+    <thead>
+        <tr>
+                            <th>Missile Launcher</th>
+                    </tr>
+    </thead>
+    <tbody>
+        <tr>
+                
+                <td>604.600</td>                   
+                    </tr>
+    </tbody>
+</table>--- Round 1 ---<br><br>***** firing to defenders *****<br>---------** firing to player with ID = 2001 **---------- <br>------- firing to fleet with ID = 213 -------- <br>---- firing from 207 to 401 ---- <br>Defender single hull=640<br>Defender count=604.600<br>currentShield before= 604600<br>currentLife before=386944<br>damage=3200<br>count=150000<br>cellvalue=0.066<br>cellsDestroyedInOneShot=48484<br>bouncedDamageForOneShot=2<br>currentCellsCount=604600<br>bounce function<br>numeroDiColpiPerDistruggereTuttiGliScudi=12.470093226631<br>bouncedDamage=22.940186453263<br>assorb function<br>totalCellsDestroyedAtMax = 7272600000<br>realTotalCellsDestroyed=604600<br>assorbedDamage=39903.6<br>inflict function<br>hullDamage=386944<br>hullDamage=386944<br>currentShield after= 0<br>currentLife after=0<br>lastShipHit after = 604.6<br>lastShots after=150000<br>***** firing to attackers *****<br>---------** firing to player with ID = 1001 **---------- <br>------- firing to fleet with ID = 675 -------- <br>---- firing from 401 to 207 ---- <br>Defender single hull=18200<br>Defender count=0150000<br>currentShield before= 150000000<br>currentLife before=2730000000<br>damage=297<br>count=605<br>cellvalue=0.64<br>cellsDestroyedInOneShot=464<br>bouncedDamageForOneShot=0<br>currentCellsCount=150000000<br>bounce function<br>numeroDiColpiPerDistruggereTuttiGliScudi=323275.86206897<br>bouncedDamage=0<br>assorb function<br>totalCellsDestroyedAtMax = 280720<br>realTotalCellsDestroyed=280720<br>assorbedDamage=179660.8<br>inflict function<br>hullDamage=24.199999999983<br>hullDamage=24.199999999983<br>currentShield after= 149719280<br>currentLife after=2729999975.8<br>lastShipHit after = 605<br>lastShots after=605<br>---------** cleanShips to player with ID = 2001 **---------- <br>------- cleanShips to fleet with ID = 213 -------- <br>---- exploding 401 ----<br>lastShipHit after = 604.6<br>lastShots after=150000<br>currentLife before=0<br>prob=1<br>this->lastShipHit >= this->fighters->getCount()/2<br>probToExplode = 1<br>604.6 = teoricExploded<br>exploded =605<br>remainLife = 0<br>currentLife after=0<br>---------** cleanShips to player with ID = 1001 **---------- <br>------- cleanShips to fleet with ID = 675 -------- <br>---- exploding 207 ----<br>lastShipHit after = 605<br>lastShots after=605<br>currentLife before=2729999975.8<br>prob=8.8644688256423E-9<br>this->lastShipHit < this->fighters->getCount()/2<br>probToExplode = 6.2051281779496E-9<br>0.00093076922669244 = teoricExploded<br>exploded =0<br>remainLife = 0<br>currentLife after=2729999975.8<br>--- Round 2 ---<br><br>***** firing to defenders *****<br>---------** firing to player with ID = 2001 **---------- <br>------- firing to fleet with ID = 213 -------- <br>---- firing from 207 to 401 ---- <br>Defender single hull=640<br>Defender count=-0.39999999999998<br>currentShield before= -399.99999999998<br>currentLife before=0<br>damage=3200<br>count=150000<br>cellvalue=0.066<br>cellsDestroyedInOneShot=48484<br>bouncedDamageForOneShot=2<br>currentCellsCount=-399.99999999998<br>bounce function<br>bouncedDamage = 0<br>assorb function<br>totalCellsDestroyedAtMax = 7272600000<br>realTotalCellsDestroyed=-400<br>assorbedDamage=-26.4<br>inflict function<br>hullDamage=0<br>hullDamage=0<br>currentShield after= 2.2737367544323E-11<br>currentLife after=0<br>lastShipHit after = -0.39999999999998<br>lastShots after=150000<br>***** firing to attackers *****<br>---------** firing to player with ID = 1001 **---------- <br>------- firing to fleet with ID = 675 -------- <br>---- firing from 401 to 207 ---- <br>---------** cleanShips to player with ID = 2001 **---------- <br>------- cleanShips to fleet with ID = 213 -------- <br>---- exploding 401 ----<br>lastShipHit after = -0.39999999999998<br>lastShots after=150000<br>currentLife before=0<br>array (
+  'slots' => '2',
+  'battleinput' => 
+  array (
+    0 => 
+    array (
+      1 => 
+      array (
+        1 => '0',
+        2 => '0',
+        3 => '0',
+        109 => '23',
+        110 => '022',
+        111 => '023',
+        202 => '0',
+        203 => '0',
+        204 => '0',
+        205 => '0',
+        206 => '0',
+        207 => '0',
+        208 => '0',
+        209 => '0',
+        210 => '0',
+        211 => '0',
+        213 => '0',
+        214 => '0',
+        215 => '0',
+        225 => '0',
+        226 => '0',
+        401 => '604.600',
+        402 => '0',
+        403 => '0',
+        404 => '0',
+        405 => '0',
+        406 => '0',
+        407 => '0',
+        408 => '0',
+        212 => '0',
+      ),
+      0 => 
+      array (
+        109 => '22',
+        110 => '25',
+        111 => '22',
+        202 => '0',
+        203 => '0',
+        204 => '0',
+        205 => '0',
+        206 => '0',
+        207 => '0150000',
+        208 => '0',
+        209 => '0',
+        210 => '0',
+        211 => '0',
+        213 => '0',
+        214 => '0',
+        215 => '0',
+        225 => '0',
+        226 => '0',
+      ),
+    ),
+  ),
+)array (
+  'page' => 'battlesim',
+  'action' => 'send',
+)

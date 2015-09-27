@@ -41,6 +41,8 @@ class BattleReport
         $this->rounds = array();
         $this->roundsCount = 0;
         $this->steal = 0;
+        $this->attackersLostUnits = null;
+        $this->defendersLostUnits = null;
     }
 
     /**
@@ -184,19 +186,27 @@ class BattleReport
     {
         return Math::recursive_sum($this->getDefendersLostUnits());
     }
-    public function getAttackersLostUnits($repair = True)
+    public function getAttackersLostUnits()
     {
+        if ($this->attackersLostUnits !== null)
+        {
+            return $this->attackersLostUnits;
+        }
         $attackersBefore = $this->getRound('START')->getAfterBattleAttackers();
         $attackersAfter = $this->getRound('END')->getAfterBattleAttackers();
-        return $this->getPlayersLostUnits($attackersBefore, $attackersAfter, $repair);
+        return $this->getPlayersLostUnits($attackersBefore, $attackersAfter);
     }
-    public function getDefendersLostUnits($repair = True)
+    public function getDefendersLostUnits()
     {
+        if ($this->defendersLostUnits !== null)
+        {
+            return $this->defendersLostUnits;
+        }
         $defendersBefore = $this->getRound('START')->getAfterBattleDefenders();
         $defendersAfter = $this->getRound('END')->getAfterBattleDefenders();
-        return $this->getPlayersLostUnits($defendersBefore, $defendersAfter, $repair);
+        return $this->getPlayersLostUnits($defendersBefore, $defendersAfter);
     }
-    private function getPlayersLostUnits(PlayerGroup $playersBefore, PlayerGroup $playersAfter, $repair = True)
+    private function getPlayersLostUnits(PlayerGroup $playersBefore, PlayerGroup $playersAfter)
     {
         $lostShips = $this->getPlayersLostShips($playersBefore, $playersAfter);
         $defRepaired = $this->getPlayerRepaired($playersBefore, $playersAfter);
@@ -209,14 +219,14 @@ class BattleReport
                 {
                     $cost = $shipType->getCost();
                     $repairedAmount = 0;
-                    if ($repair && $defRepaired->existPlayer($idPlayer) && $defRepaired->getPlayer($idPlayer)->existFleet($idFleet) && $defRepaired->getPlayer($idPlayer)->getFleet($idFleet)->existShipType($idShipType))
+                    if ($defRepaired->existPlayer($idPlayer) && $defRepaired->getPlayer($idPlayer)->existFleet($idFleet) && $defRepaired->getPlayer($idPlayer)->getFleet($idFleet)->existShipType($idShipType))
                     {
                         $repairedAmount = $defRepaired->getPlayer($idPlayer)->getFleet($idFleet)->getShipType($idShipType)->getCount();
                     }
                     $count = $shipType->getCount() - $repairedAmount;
                     if ($count > 0)
                     {
-                        $return[$idPlayer][$idFleet][get_class($shipType)][$idShipType] = array($cost[0] * $count, $cost[1] * $count);
+                        $return[$idPlayer][$idFleet][$idShipType] = array($cost[0] * $count, $cost[1] * $count, $cost[2] * $count);
                     }
                     elseif ($count < 0)
                     {
@@ -235,59 +245,63 @@ class BattleReport
     }
     public function getMoonProb()
     {
-        return min(floor(array_sum($this->getDebris()) / MOON_UNIT_PROB), MAX_MOON_PROB);
+        return min(round(array_sum($this->getDebris()) / MOON_UNIT_PROB), MAX_MOON_PROB);
     }
     public function getAttackerDebris()
     {
         $metal = 0;
         $crystal = 0;
-        foreach ($this->getAttackersLostUnits(!REPAIRED_DO_DEBRIS) as $idPlayer => $player)
+        $deuterium = 0;
+        foreach ($this->getAttackersLostUnits() as $idPlayer => $player)
         {
             foreach ($player as $idFleet => $fleet)
             {
-                foreach($fleet as $role => $values)
+                foreach ($fleet as $idShipType => $lost)
                 {
-                    foreach ($values as $idShipType => $lost)
-                    {
-                        $metal += $lost[0];
-                        $crystal += $lost[1];      
-                    }
-                    $factor = constant(strtoupper($role).'_DEBRIS_FACTOR');
-                    $metal *= $factor;
-                    $crystal *= $factor;
+				if($idShipType >= 400 ) {
+                    $metal += $lost[0] * DEBRIS_FACTOR_DEF;
+                    $crystal += $lost[1] * DEBRIS_FACTOR_DEF;
+                    $deuterium += $lost[2] * DEBRIS_FACTOR_DEF;
+				} else {
+                    $metal += $lost[0] * DEBRIS_FACTOR;
+                    $crystal += $lost[1] * DEBRIS_FACTOR;
+                    $deuterium += $lost[2] * DEBRIS_FACTOR;
+				}
                 }
             }
         }
-        return array($metal, $crystal);
+        return array($metal, $crystal, $deuterium);
     }
     public function getDefenderDebris()
     {
         $metal = 0;
         $crystal = 0;
-        foreach ($this->getDefendersLostUnits(!REPAIRED_DO_DEBRIS) as $idPlayer => $player)
+        $deuterium = 0;
+        foreach ($this->getDefendersLostUnits() as $idPlayer => $player)
         {
             foreach ($player as $idFleet => $fleet)
             {
-                foreach($fleet as $role => $values)
+                foreach ($fleet as $idShipType => $lost)
                 {
-                    foreach ($values as $idShipType => $lost)
-                    {
-                        $metal += $lost[0];
-                        $crystal += $lost[1];      
-                    }
-                    $factor = constant(strtoupper($role).'_DEBRIS_FACTOR');
-                    $metal *= $factor;
-                    $crystal *= $factor;
+				if($idShipType >= 400 ) {
+                    $metal += $lost[0] * DEBRIS_FACTOR_DEF;
+                    $crystal += $lost[1] * DEBRIS_FACTOR_DEF;
+                    $deuterium += $lost[2] * DEBRIS_FACTOR_DEF;
+				} else {
+                    $metal += $lost[0] * DEBRIS_FACTOR;
+                    $crystal += $lost[1] * DEBRIS_FACTOR;
+                    $deuterium += $lost[2] * DEBRIS_FACTOR;
+				}
                 }
             }
         }
-        return array($metal, $crystal);
+        return array($metal, $crystal, $deuterium);
     }
     public function getDebris()
     {
         $aDebris = $this->getAttackerDebris();
         $dDebris = $this->getDefenderDebris();
-        return array($aDebris[0] + $dDebris[0], $aDebris[1] + $dDebris[1]);
+        return array($aDebris[0] + $dDebris[0], $aDebris[1] + $dDebris[1], $aDebris[2] + $dDebris[2]);
     }
     
     public function getAttackersTech()
@@ -353,25 +367,41 @@ class BattleReport
     }
     private function getAfterBattlePlayerGroup($players, $playersRepaired)
     {
-        foreach ($playersRepaired->getIterator() as $idPlayer => $playerRepaired)
+        foreach ($playersRepaired->getIterator() as $idPlayer => $player)
         {
             if (!$players->existPlayer($idPlayer)) // player is completely destroyed
             {
-                $players->addPlayer($playerRepaired);
+                $endPlayer = $player;
+                $players->addPlayer($endPlayer);
                 continue;
             }
-            $endPlayer = $players->getPlayer($idPlayer);
-            foreach ($playerRepaired->getIterator() as $idFleet => $fleetRepaired)
+            else
+            {
+                $endPlayer = $players->getPlayer($idPlayer);
+            }
+            foreach ($player->getIterator() as $idFleet => $fleet)
             {
                 if (!$endPlayer->existFleet($idFleet))
                 {
-                    $endPlayer->addFleet($fleetRepaired);
+                    $endFleet = $fleet;
+                    $endPlayer->addFleet($endFleet);
                     continue;
                 }
-                $endFleet = $endPlayer->getFleet($idFleet);
-                foreach ($fleetRepaired->getIterator() as $idShipType => $shipTypeRepaired)
+                else
                 {
-                    $endFleet->addShipType($shipTypeRepaired);
+                    $endFleet = $endPlayer->getFleet($idFleet);
+                }
+                foreach ($fleet->getIterator() as $idShipType => $shipType)
+                {
+                    if (!$endFleet->existShipType($idShipType))
+                    {
+                        $endShipType = $shipType;
+                    }
+                    else
+                    {
+                        $endShipType = $endFleet->getShipType($idShipType);
+                        $endShipType->increment($shipType->getCount());
+                    }
                 }
             }
         }

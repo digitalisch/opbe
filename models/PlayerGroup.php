@@ -130,6 +130,13 @@ class PlayerGroup extends Iterable
             $player->repairShields();
         }
     }
+    public function repairHull()
+    {
+        foreach ($this->array as $idPlayer => $player)
+        {
+            $player->repairHull();
+        }
+    }
     public function getEquivalentFleetContent()
     {
         $merged = new Fleet(-1);

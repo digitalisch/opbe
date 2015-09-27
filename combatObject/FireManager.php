@@ -21,9 +21,9 @@
  *
  * @package OPBE
  * @author Jstar <frascafresca@gmail.com>
- * @copyright 2015 Jstar <frascafresca@gmail.com>
+ * @copyright 2013 Jstar <frascafresca@gmail.com>
  * @license http://www.gnu.org/licenses/ GNU AGPLv3 License
- * @version 21-03-2015
+ * @version beta(26-10-2013)
  * @link https://github.com/jstar88/opbe
  */
 class FireManager extends Iterable
@@ -31,7 +31,7 @@ class FireManager extends Iterable
     protected $array = array();
     public function add(Fire $fire)
     {
-        $this->array[] = $fire;
+        $this->array[] = $fire->cloneMe();
     }
     public function getAttackerTotalShots()
     {

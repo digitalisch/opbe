@@ -11,7 +11,7 @@ class LangImplementation implements Lang
     
     public function getShipName($id)
     {
-        return $this->lang['tech'][$id];
+        return $this->lang['tech_rc'][$id];
     }
     public function getAttackersAttackingDescr($amount, $damage)
     {

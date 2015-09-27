@@ -53,7 +53,7 @@ class WebTest extends RunnableTest
                 $id = floor($id);
                 if ($count > 0 && $id > 0)
                 {
-                    $fleetObj->addShipType($this->getShipType($id, $count));
+                    $fleetObj->add($this->getShipType($id, $count));
                 }
             }
             if (!$fleetObj->isEmpty())
@@ -84,13 +84,7 @@ else
     $selectedVar = 'XG';
 }
 WebTest::includeVars($selectedVar);
-if ($selectedVar == 'XG'){
-    LangManager::getInstance()->setImplementation(new XGLangImplementation());
-}
-else{
-    LangManager::getInstance()->setImplementation(new MoonsLangImplementation());
-}
-
+LangManager::getInstance()->setImplementation(new LangImplementation($selectedVar));
 
 if (isset($_GET['good']))
 {
@@ -199,8 +193,6 @@ else
     $count = floor(file_get_contents('count.txt'));
     $list = WebTest::getVarsList();
     $reslist = WebTest::$reslist;
-    $combatCaps = WebTest::$CombatCaps;
-    $pricelist = WebTest::$pricelist;
     require ('WebTestGui.html');
 
 }

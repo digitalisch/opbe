@@ -171,6 +171,13 @@ class Player extends Iterable
             $fleet->repairShields();
         }
     }
+    public function repairHull()
+    {
+        foreach ($this->array as $idFleet => $fleet)
+        {
+            $fleet->repairHull();
+        }
+    }
     public function getEquivalentFleetContent()
     {
         $merged = new Fleet(-1);
@@ -192,7 +199,7 @@ class Player extends Iterable
         }
         else
         {
-            $fl->mergeFleet($fleetDefender);
+            $f->mergeFleet($fleetDefender);
         }
     }
     public function mergePlayerFleets(Player $player)
@@ -215,6 +222,6 @@ class Player extends Iterable
     public function cloneMe()
     {
         $fleets = array_values($this->array);
-        return new Player($this->id, $fleets ,$this->weapons_tech, $this->shields_tech, $this->armour_tech, $this->name);
+        return new Player($this->id, $fleets ,$this->weapons_tech, $this->shields_tech, $this->armour_tech);
     }
 }

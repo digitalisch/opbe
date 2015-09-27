@@ -99,7 +99,7 @@ if ($FleetRow['fleet_mess'] == 0 && $FleetRow['fleet_start_time'] <= time())
         {
             if ($targetPlanet[$resource[$i]] != 0)
             {
-                $homeFleet->addShipType(getShipType($i, $targetPlanet[$resource[$i]]));
+                $homeFleet->add(getShipType($i, $targetPlanet[$resource[$i]]));
             }
         }
     }
@@ -109,7 +109,7 @@ if ($FleetRow['fleet_mess'] == 0 && $FleetRow['fleet_start_time'] <= time())
         {
             if ($targetPlanet[$resource[$i]] != 0)
             {
-                $homeFleet->addShipType(getShipType($i, $targetPlanet[$resource[$i]]));
+                $homeFleet->add(getShipType($i, $targetPlanet[$resource[$i]]));
             }
         }
     }
@@ -189,7 +189,7 @@ function getPlayerGroup($fleetRow)
         list($id, $count) = explode(',', $serializedType);
         if ($id != 0 && $count != 0)
         {
-            $fleet->addShipType(getShipType($id, $count));
+            $fleet->add(getShipType($id, $count));
         }
     }
     $player_info = doquery("SELECT * FROM {{table}} WHERE id =$idPlayer", 'users', true);
@@ -213,7 +213,7 @@ function getPlayerGroupFromQuery($result, $targetUser = false)
             list($id, $count) = explode(',', $serializedType);
             if ($id != 0 && $count != 0)
             {
-                $fleet->addShipType(getShipType($id, $count));
+                $fleet->add(getShipType($id, $count));
             }
         }
         //making the player object and add it to playerGroup object
@@ -328,7 +328,7 @@ function sendMessage($FleetRow, $report, $lang, $resource)
             $style = "red";
         }
         $raport = "<a href=\"#\" style=\"color:" . $style . ";\" OnClick=\'f(\"CombatReport.php?raport=" . $rid . "\", \"\");\' >" . $lang['sys_mess_attack_report'] . " [" . $FleetRow['fleet_end_galaxy'] . ":" . $FleetRow['fleet_end_system'] . ":" . $FleetRow['fleet_end_planet'] . "]</a>";
-        SendSimpleMessage($id, '', $FleetRow['fleet_start_time'], 3, $lang['sys_mess_tower'], $raport, '');
+        SendSimpleMessage($FleetRow['fleet_owner'], '', $FleetRow['fleet_start_time'], 3, $lang['sys_mess_tower'], $raport, '');
     }
     foreach ($idDefs as $id)
     {

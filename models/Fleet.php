@@ -21,9 +21,9 @@
  *
  * @package OPBE
  * @author Jstar <frascafresca@gmail.com>
- * @copyright 2015 Jstar <frascafresca@gmail.com>
+ * @copyright 2013 Jstar <frascafresca@gmail.com>
  * @license http://www.gnu.org/licenses/ GNU AGPLv3 License
- * @version 23-3-2015)
+ * @version beta(26-10-2013)
  * @link https://github.com/jstar88/opbe
  */
 class Fleet extends Iterable
@@ -47,7 +47,7 @@ class Fleet extends Iterable
         }
         foreach ($shipTypes as $shipType)
         {
-            $this->addShipType($shipType);
+            $this->add($shipType);
         }
     }
     public function getName()
@@ -74,7 +74,7 @@ class Fleet extends Iterable
         if(is_numeric($shields)) $this->shields_tech = intval($shields);
         if(is_numeric($armour)) $this->armour_tech = intval($armour);
     }
-    public function addShipType(ShipType $shipType)
+    public function add(ShipType $shipType)
     {
         if (isset($this->array[$shipType->getId()]))
         {
@@ -106,7 +106,7 @@ class Fleet extends Iterable
     {
         foreach ($other->getIterator() as $idShipType => $shipType)
         {
-            $this->addShipType($shipType);
+            $this->add($shipType);
         }
     }
     public function getShipType($id)
@@ -139,35 +139,14 @@ class Fleet extends Iterable
         //doesn't matter who shot first, but who receive first the damage
         foreach ($fires->getIterator() as $fire)
         {
-            $tmp = array();
             foreach ($this->getOrderedIterator() as $idShipTypeDefender => $shipTypeDefender)
             {
                 $idShipTypeAttacker = $fire->getId();
-                log_comment( "---- firing from $idShipTypeAttacker to $idShipTypeDefender ----");
+                echo "---- firing from $idShipTypeAttacker to $idShipTypeDefender ---- <br>";
                 $xs = $fire->getShotsFiredByAllToDefenderType($shipTypeDefender, true);
                 $ps = $shipTypeDefender->inflictDamage($fire->getPower(), $xs->result);
-                log_var('$xs',$xs);
-                $tmp[$idShipTypeDefender] = $xs->rest;
                 if ($ps != null)
                     $physicShots[$idShipTypeDefender][] = $ps;
-            }
-            log_var('$tmp',$tmp);
-            // assign the last shot to the more likely shitType
-            $m = 0;
-            $f = 0;
-            foreach ($tmp as $k => $v)
-            {
-                if ($v > $m)
-                {
-                    $m = $v;
-                    $f = $k;
-                }    
-            }
-            if ($f != 0)
-            {
-                log_comment('adding 1 shot');
-                $ps = $this->getShipType($f)->inflictDamage($fire->getPower(), 1);
-                $physicShots[$f][] = $ps;
             }
 
         }
@@ -188,7 +167,7 @@ class Fleet extends Iterable
         $shipsCleaners = array();
         foreach ($this->array as $id => $shipType)
         {
-            log_comment("---- exploding $id ----");
+            echo "---- exploding $id ----<br>";
             $sc = $shipType->cleanShips();
             $this->count -= $sc->getExplodedShips();
             if ($shipType->isEmpty())
@@ -204,6 +183,13 @@ class Fleet extends Iterable
         foreach ($this->array as $id => $shipTypeDefender)
         {
             $shipTypeDefender->repairShields();
+        }
+    }
+    public function repairHull()
+    {
+        foreach ($this->array as $id => $shipTypeDefender)
+        {
+            $shipTypeDefender->repairHull();
         }
     }
     public function isEmpty()

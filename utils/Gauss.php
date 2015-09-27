@@ -70,7 +70,7 @@ class Gauss
         $i = 0;
         if ($min > $m || $max < $m)
         {
-            throw new Exception("Mean is not bounded by min and max");
+            throw new Exception();
         }
         while (true)
         {
@@ -82,7 +82,7 @@ class Gauss
             $i++;
             if ($i > 10)
             {
-                return mt_rand($min, $max);
+                throw new Exception("min=$min;max=$max;n=$n;m=$m;s=$s");
             }
         }
     }

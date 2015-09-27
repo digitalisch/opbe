@@ -1,0 +1,77 @@
+Wednesday 9th of September 2015 01:44:40 AM
+exception 'Exception' with message 'min=0.14285714285714;max=1.5714285714286;n=1.6380786652231;m=1.4285714285714;s=0.42973440867789' in /home/starsquest/servers/game/includes/libs/opbe/utils/Gauss.php:85
+Stack trace:
+#0 /home/starsquest/servers/game/includes/libs/opbe/combatObject/Fire.php(147): Gauss::getNextMsBetween(1.4285714285714, 0.42973440867789, 0.14285714285714, 1.5714285714286)
+#1 /home/starsquest/servers/game/includes/libs/opbe/combatObject/Fire.php(124): Fire->getShotsFromOneAttackerShipOfType(Object(Ship))
+#2 /home/starsquest/servers/game/includes/libs/opbe/combatObject/Fire.php(108): Fire->calculateRf()
+#3 /home/starsquest/servers/game/includes/libs/opbe/combatObject/Fire.php(92): Fire->calculateTotal()
+#4 /home/starsquest/servers/game/includes/libs/opbe/combatObject/Fire.php(212): Fire->getAttackerTotalShots()
+#5 /home/starsquest/servers/game/includes/libs/opbe/combatObject/Fire.php(200): Fire->getShotsFiredByAllToOne()
+#6 /home/starsquest/servers/game/includes/libs/opbe/models/Fleet.php(146): Fire->getShotsFiredByAllToDefenderType(Object(Defense), true)
+#7 /home/starsquest/servers/game/includes/libs/opbe/models/Player.php(147): Fleet->inflictDamage(Object(FireManager))
+#8 /home/starsquest/servers/game/includes/libs/opbe/models/PlayerGroup.php(106): Player->inflictDamage(Object(FireManager))
+#9 /home/starsquest/servers/game/includes/libs/opbe/core/Round.php(109): PlayerGroup->inflictDamage(Object(FireManager))
+#10 /home/starsquest/servers/game/includes/libs/opbe/core/Battle.php(77): Round->startRound()
+#11 [internal function]: Battle->startBattle()
+#12 /home/starsquest/servers/game/includes/libs/opbe/utils/DebugManager.php(57): call_user_func_array(Array, Array)
+#13 /home/starsquest/servers/game/includes/libs/opbe/implementations/2Moons/1_6_1_injectionmode/calculateAttack.php(121): DebugManager::{closure}()
+#14 /home/starsquest/servers/game/includes/classes/missions/MissionCaseAttack.php(139): calculateAttack(Array, Array, '66', '10')
+#15 /home/starsquest/servers/game/includes/classes/class.FlyingFleetHandler.php(72): MissionCaseAttack->TargetEvent()
+#16 /home/starsquest/servers/game/includes/FleetHandler.php(94): FlyingFleetHandler->__construct(Object(mysqli_result))
+#17 /home/starsquest/servers/game/includes/common.php(103): require('/home/starsques...')
+#18 /home/starsquest/servers/game/game.php(18): require('/home/starsques...')
+#19 {main}
+$_POST =
+$_GET =
+        <table class="lined widthFull">
+    <caption> <br> 90% - 90% - 100%</caption>
+    <thead>
+        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                    </tr>
+    </thead>
+    <tbody>
+        <tr>
+                
+                <td>177</td>                   
+                
+                <td>1237</td>                   
+                
+                <td>206</td>                   
+                
+                <td>63</td>                   
+                
+                <td>277</td>                   
+                
+                <td>100</td>                   
+                    </tr>
+    </tbody>
+</table><br>
+        <table class="lined widthFull">
+    <caption> <br> 80% - 70% - 70%</caption>
+    <thead>
+        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                    </tr>
+    </thead>
+    <tbody>
+        <tr>
+                
+                <td>1</td>                   
+                
+                <td>1</td>                   
+                
+                <td>1</td>                   
+                    </tr>
+    </tbody>
+</table>--- Round 1 ---<br><br>***** firing to defenders *****<br>---------** firing to player with ID = 336 **---------- <br>------- firing to fleet with ID = 0 -------- <br>---- firing from 203 to 401 ---- <br>Defender single hull=340<br>Defender count=1<br>currentShield before= 1000<br>currentLife before=340<br>damage=9.5<br>count=59<br>cellvalue=0.034<br>cellsDestroyedInOneShot=279<br>bouncedDamageForOneShot=2<br>currentCellsCount=1000<br>bounce function<br>numeroDiColpiPerDistruggereTuttiGliScudi=3.584229390681<br>bouncedDamage=5.168458781362<br>assorb function<br>totalCellsDestroyedAtMax = 16461<br>realTotalCellsDestroyed=1000<br>assorbedDamage=34<br>inflict function<br>hullDamage=340<br>hullDamage=340<br>currentShield after= 0<br>currentLife after=0<br>lastShipHit after = 1<br>lastShots after=59<br>---- firing from 203 to 402 ---- <br>Defender single hull=340<br>Defender count=1<br>currentShield before= 1000<br>currentLife before=340<br>damage=9.5<br>count=59<br>cellvalue=0.068<br>cellsDestroyedInOneShot=139<br>bouncedDamageForOneShot=2<br>currentCellsCount=1000<br>bounce function<br>numeroDiColpiPerDistruggereTuttiGliScudi=7.1942446043165<br>bouncedDamage=12.388489208633<br>assorb function<br>totalCellsDestroyedAtMax = 8201<br>realTotalCellsDestroyed=1000<br>assorbedDamage=68<br>inflict function<br>hullDamage=340<br>hullDamage=340<br>currentShield after= 0<br>currentLife after=0<br>lastShipHit after = 1<br>lastShots after=59<br>---- firing from 203 to 405 ---- <br>Defender single hull=1360<br>Defender count=1<br>currentShield before= 1000<br>currentLife before=1360<br>damage=9.5<br>count=59<br>cellvalue=1.02<br>cellsDestroyedInOneShot=9<br>bouncedDamageForOneShot=0<br>currentCellsCount=1000<br>bounce function<br>numeroDiColpiPerDistruggereTuttiGliScudi=111.11111111111<br>bouncedDamage=0<br>assorb function<br>totalCellsDestroyedAtMax = 531<br>realTotalCellsDestroyed=531<br>assorbedDamage=541.62<br>inflict function<br>hullDamage=18.88<br>hullDamage=18.88<br>currentShield after= 469<br>currentLife after=1341.12<br>lastShipHit after = 1<br>lastShots after=59<br>---- firing from 205 to 401 ---- <br>Defender single hull=340<br>Defender count=1<br>currentShield before= 0<br>currentLife before=0<br>damage=285<br>count=412<br>cellvalue=0.034<br>cellsDestroyedInOneShot=8382<br>bouncedDamageForOneShot=0<br>currentCellsCount=0<br>bounce function<br>assorb function<br>totalCellsDestroyedAtMax = 3453384<br>realTotalCellsDestroyed=0<br>assorbedDamage=0<br>inflict function<br>hullDamage=0<br>hullDamage=0<br>currentShield after= 0<br>currentLife after=0<br>lastShipHit after = 2<br>lastShots after=471<br>---- firing from 205 to 402 ---- <br>Defender single hull=340<br>Defender count=1<br>currentShield before= 0<br>currentLife before=0<br>damage=285<br>count=412<br>cellvalue=0.068<br>cellsDestroyedInOneShot=4191<br>bouncedDamageForOneShot=0<br>currentCellsCount=0<br>bounce function<br>assorb function<br>totalCellsDestroyedAtMax = 1726692<br>realTotalCellsDestroyed=0<br>assorbedDamage=0<br>inflict function<br>hullDamage=0<br>hullDamage=0<br>currentShield after= 0<br>currentLife after=0<br>lastShipHit after = 2<br>lastShots after=471<br>---- firing from 205 to 405 ---- <br>Defender single hull=1360<br>Defender count=1<br>currentShield before= 469<br>currentLife before=1341.12<br>damage=285<br>count=412<br>cellvalue=1.02<br>cellsDestroyedInOneShot=279<br>bouncedDamageForOneShot=0<br>currentCellsCount=469<br>bounce function<br>numeroDiColpiPerDistruggereTuttiGliScudi=1.6810035842294<br>bouncedDamage=0<br>assorb function<br>totalCellsDestroyedAtMax = 114948<br>realTotalCellsDestroyed=469<br>assorbedDamage=478.38<br>inflict function<br>hullDamage=1341.12<br>hullDamage=1341.12<br>currentShield after= 0<br>currentLife after=0<br>lastShipHit after = 2<br>lastShots after=471<br>---- firing from 206 to 401 ---- <br>array (
+)array (
+  'page' => 'resources',
+)

@@ -261,7 +261,7 @@ class Round
             {
                 foreach ($fleetPS as $idTypeD => $typeDPS)
                 {
-                    foreach ($typeDPS as $typeAPS)
+                    foreach ($typeDPS as $idTypeA => $typeAPS)
                     {
                         $ass += $typeAPS->getAssorbedDamage();
                     }
